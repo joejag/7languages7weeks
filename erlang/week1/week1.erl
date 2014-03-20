@@ -1,5 +1,5 @@
 -module(week1).
--export([word_count/1, word_count_recursive/1, counter/0]).
+-export([word_count/1, word_count_recursive/1, counter/0, message/1]).
 
 % without recursion
 word_count(String) -> length(string:tokens(String, " ")).
@@ -21,3 +21,11 @@ counter(10) ->
   10;
 counter(N) ->
   counter(N+1).
+
+% 1.3 Matches selectively to print "success" or "error:message" given input 
+%     of the form {error, Message} or success
+
+message({error, _Message}) ->
+  "error:message";
+message(success) ->
+  "success".
