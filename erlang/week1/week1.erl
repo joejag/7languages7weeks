@@ -1,14 +1,24 @@
 -module(week1).
--export([words_in_string/1, words_in_string_recursive/1]).
+-export([word_count/1, word_count_recursive/1, word_count_recursive_again/1]).
 
 % without recursion
-words_in_string(String) -> length(string:tokens(String, " ")).
+word_count(String) -> length(string:tokens(String, " ")).
 
 % with recursion
-words_in_string_recursive(String) -> 
-  words_in_string_recursive(0, string:tokens(String, " ")).
-words_in_string_recursive(Count, []) -> 
+word_count_recursive(String) -> 
+  word_count_recursive(0, string:tokens(String, " ")).
+word_count_recursive(Count, []) -> 
   Count;
-words_in_string_recursive(Count, List) -> 
+word_count_recursive(Count, List) -> 
   [_Head|Tail] = List,
-  words_in_string_recursive(Count + 1, Tail).
+  word_count_recursive(Count + 1, Tail).
+
+% with recursion, different
+word_count_recursive_again(String) -> 
+  word_count_recursive_again(0, String).
+word_count_recursive_again(Count, [" "|Rest]) ->
+  word_count_recursive_again(Count + 1, Rest);
+word_count_recursive_again(Count, [_|[]]) ->
+  Count;
+word_count_recursive_again(Count, [_|Rest]) ->
+  word_count_recursive_again(Count, Rest).
